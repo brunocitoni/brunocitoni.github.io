@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>York Theatre Auraliser</title>
+
+  <link rel="stylesheet" href="rules.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/three.js/r69/three.min.js"></script>
+</head> 
+   
+    
+    
+<body>
+    
+  <div id="page-wrapper">
+    
+      <header id="title">
+      <h1>York Theatre Auraliser for Google Chrome</h1>
+      </header>
+       
+    <section id="pix">
+    <canvas id="staticPic"></canvas>
+    <div id="movingPic"></div>
+    </section>
+        
+    <div id="info">
+        
+        <div id="userInputDiv">
+         Real-Time input <input type="checkbox" id="userInput"> </input>
+        </div> <br>
+            
+        <div id="sourceChoiceDiv"> Sound Source:
+            <select id ="sourceChoice" class="unhidden">
+                <option id="actor">Actor</option>
+                <option id="quartet">Quartet</option>
+                <option id="actor2">Actor 2</option>
+                <option id="quartet2">Quartet 2</option>
+            </select>
+        </div><br>
+        
+        <div> Receiver Position: 
+            <select id = "receiverChoice" class="unhidden">
+                <option id="stalls">Stalls</option>
+                <option id="uppercircle">Upper Circle</option>
+                <option id="gallery">Gallery</option>
+            </select>
+        </div> <br>
+        
+        <div> 
+            <label>Dry</label>
+    <input type="range" value="100" step="1" min="0" max="100" id="wetDryMix"> </input><label>Wet</label>
+      </div> <br>
+        
+        <div id="startAndStopButtons" class="unhidden">
+        Listen:<input type = "button" id= "playConv" class="unhidden">
+        
+        &nbsp;&nbsp;Stop:<input type = "button" id= "stopConv" class="hidden">
+        
+        </div>
+    
+        <div id="resetDiv" class="hidden">
+        <input type="button" id="resetButton" onclick="history.go(0)"></input><label> Back </label>
+     </div>
+        
+    </div>
+    
+<div id="help"> 
+How to:
+    <div> With headphones on, select the receiver position you would like to audition then check the Real-Time checkbox <br><br> Alternatively select a sound source and a receiver position, then click listen. To change receiver position, make sure you stop and press listen again.<br> <br> Move the slider to appreciate the difference between dry signal and wet signal while either real-time input or a source is playing.
+</div>
+</div>
+
+  </div>
+
+<script src="auraliser.js"></script>
+</body>
+</html>
