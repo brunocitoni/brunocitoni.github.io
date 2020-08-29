@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>TeamPicker Web</h1>
+
+<form id="myForm">
+  <label for="fname">First name:</label>
+  <input type="text" id="fname" name="fname"><br><br>
+  <label for="lname">Last name:</label>
+  <input type="text" id="lname" name="lname"><br><br>
+  <label for="pvalue">Player value (1-5):</label>
+  <input type="text" id="pvalue" name="pvalue"><br><br>
+  <input type="button" onclick="playerFormOnClick()" value="Submit">
+</form>
+    
+    <button id=findTeamsButton onclick="displayTeam()">Find Teams!</button>
+    <label for="outcomeDropdown">Choose a team:</label>
+    <select name="Select Outcome" id="outcomeDropdown">
+    <option value="0">Default</option>
+    </select>
+    
+    
+<p id="whiteTeam"></p>
+<p>VS</p>
+<p id="blackTeam"></p>
+
+<script src="script.js"></script>
+    
+</body>
+</html>
