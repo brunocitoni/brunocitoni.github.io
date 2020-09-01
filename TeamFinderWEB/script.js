@@ -1,7 +1,3 @@
-var players = {names : ["graeme", "abed", "bruno", "yingke","KC", "unkown 1", "henrik", "unknown 2", "unknown 3","unknown 4"] , values : [4, 4, 2, 1, 3, 3, 4, 3, 3, 3]};
-
-
-
 function combinationsAV2(n, k) {
   var result= [];
   var combos = [];
@@ -20,6 +16,7 @@ function combinationsAV2(n, k) {
   recurse(1, combos);
   return result;
 }
+
 function sum(input){
              
  if (toString.call(input) !== "[object Array]")
@@ -34,11 +31,6 @@ function sum(input){
                   total += Number(input[i]);
                }
              return total;
-}
-
-
-function playerFormOnClick(){
-     document.getElementById("myForm").submit();
 }
 
 function findTeams(players){
@@ -87,7 +79,8 @@ function findTeams(players){
         whiteTeam = whiteTeamNew;
         blackTeam = blackTeamNew;
 
-        out = {whiteTeam,blackTeam};
+        out = { whiteTeam, blackTeam };
+        populateDropdown("outcomeDropdown", whiteTeam);
         return out;
     }
     else {
@@ -95,35 +88,27 @@ function findTeams(players){
         // TODO abort i na better way that this!
         return 0;
     }
+
  
-    
 }
 
+function populateDropdown(id, list) {
+    // populate dropdown
+    var select = document.getElementById(id);
+    var options = list;
+    select.innerHTML = ""; //clear dropdown first
+    for (var i = 0; i < options.length; i++) {
+        var opt = options[i];
 
-//main
-var whiteteam = [];
-var blackTeam =[];
+        var el = document.createElement("option");
+        el.text = i + 1;
+        el.value = i; // so that you don't have to -1 to use this as index
 
-var combinationOutput = findTeams(players);
-
-whiteTeam = combinationOutput.whiteTeam;
-blackTeam = combinationOutput.blackTeam;
-
-// populate dropdown
-var select = document.getElementById("outcomeDropdown"); 
-var options = whiteTeam; 
-select.innerHTML = ""; //clear dropdown first
-for(var i = 0; i < options.length; i++) {
-    var opt = options[i];
-
-    var el = document.createElement("option");
-    el.text = i+1;
-    el.value = i; // so that you don't have to -1 to use this as index
-
-    select.add(el);
+        select.add(el);
+    }
 }
 
-function displayTeam(){
+function displayTeam() {
     // pick which team to show
     var string1 = "";
     var string2 = "";
@@ -132,26 +117,132 @@ function displayTeam(){
     var strUser = e.options[e.selectedIndex].value;
 
 
-    for (j=0; j < whiteTeam[strUser].length; j++){
-        if (j<whiteTeam[strUser].length-1)
-        {
-            string1 = string1 + players.names[whiteTeam[strUser][j]-1] + ", ";
-            string2 = string2 + players.names[blackTeam[strUser][j]-1] + ", ";
-        } else if (j<whiteTeam[strUser].length)
-        {
-            string1 = string1 + players.names[whiteTeam[strUser][j]-1]+ ". ";
-            string2 = string2 + players.names[blackTeam[strUser][j]-1] + ". ";
+    for (j = 0; j < whiteTeam[strUser].length; j++) {
+        if (j < whiteTeam[strUser].length - 1) {
+            string1 = string1 + players.names[whiteTeam[strUser][j] - 1] + ", ";
+            string2 = string2 + players.names[blackTeam[strUser][j] - 1] + ", ";
+        } else if (j < whiteTeam[strUser].length) {
+            string1 = string1 + players.names[whiteTeam[strUser][j] - 1];
+            string2 = string2 + players.names[blackTeam[strUser][j] - 1];
         }
-        }
-
-        // TODO FIX THIS (currently it only prints last one found)
-        document.getElementById("whiteTeam").innerHTML = string1;
-        document.getElementById("blackTeam").innerHTML = string2;
+    }
+    document.getElementById("whiteTeam").innerHTML = string1;
+    document.getElementById("VS").innerHTML = "VS";
+    document.getElementById("blackTeam").innerHTML = string2;
 }
 
+function makeCheckboxList(array) {
+    // Create the list element:
+    var list = document.createElement('ul');
+
+    for (var i = 0; i < array.length; i++) {
+        // Create the list item:
+        var item = document.createElement('li');
+        var checkbox = document.createElement('input');
+        checkbox.type = "checkbox";
+        var string = "playersCheckbox" + i;
+        checkbox.id = string;
+
+        // Set its contents:document 
+        item.appendChild(document.createTextNode(array[i]));
+        item.appendChild(checkbox);
+        // Add it to the list:
+        list.appendChild(item);
+    }
+
+    // Finally, return the constructed list:
+    return list;
+}
+
+function onClickFindTeamButton() {
+
+    var lgh = players.names.length;
+    var playingPlayers = { names: [], values: [] };
+    for (var i = 0; i < lgh; i++) {
+        var string = "playersCheckbox" + i;
+        if (document.getElementById(string).checked) {
+            playingPlayers.names.push(players.names[i]);
+            playingPlayers.values.push(players.values[i]);
+        }
+    }
+
+    var combinationOutput = findTeams(playingPlayers);
+    whiteTeam = combinationOutput.whiteTeam;
+    blackTeam = combinationOutput.blackTeam;
+
+    //TODO print 1st team even without the displayTeam button being pressed
+}
+
+function onClickRefreshPlayersListButton() {
+    document.getElementById('foo').innerHTML = "";
+    document.getElementById('foo').appendChild(makeCheckboxList(players.names));
+}
+
+// straight outta internet
+function readBlob(opt_startByte, opt_stopByte) {
+
+    var files = document.getElementById('fileInput').files;
+    if (!files.length) {
+        alert('Please select a file!');
+        return;
+    }
+
+    var file = files[0];
+    var start = parseInt(opt_startByte) || 0;
+    var stop = parseInt(opt_stopByte) || file.size - 1;
+
+    var reader = new FileReader();
+
+    var doSomeStuff = function () {
+        // parse and uverride players list 
+       // console.log("The text content was " + txtContent);
+
+        var myArray = txtContent.split('\n');
+        var myArray2 = [];
+
+        for (i = 0; i < myArray.length; i++) {
+            myArray2.push(myArray[i].split(/([0-9]+)/));
+        }
 
 
-//document.getElementById("demo").innerHTML = desiredTeamValue;
+        for (i = 0; i < myArray2.length; i++) {
+            players.names.push(myArray2[i][0]);
+            players.values.push(parseInt(myArray2[i][1]));
+        }
+        // refresh players list
+        onClickRefreshPlayersListButton();
+    };
 
-//document.getElementById("demo").innerHTML = whiteTeam + " VS " + blackTeam;
 
+    // If we use onloadend, we need to check the readyState.
+    reader.onloadend = function (evt) {
+        if (evt.target.readyState == FileReader.DONE) { // DONE == 2
+            txtContent = evt.target.result;
+            doSomeStuff();
+        }
+    };
+
+    var blob = file.slice(start, stop + 1);
+    reader.readAsBinaryString(blob);
+}
+document.querySelector('.readBytesButtons').addEventListener('click', function (evt) {
+    if (evt.target.tagName.toLowerCase() == 'button') {
+        var startByte = evt.target.getAttribute('data-startbyte');
+        var endByte = evt.target.getAttribute('data-endbyte');
+        readBlob(startByte, endByte);
+    }
+}, false);
+
+//main
+var players = { names: [], values: [] };
+var whiteteam = [];
+var blackTeam = [];
+var txtContent;
+// read text file
+
+// parse
+//alert(txtContent);
+
+
+// Add the contents of players to #foo:
+//document.getElementById('foo').appendChild(makeCheckboxList(players.names));

@@ -1,0 +1,9 @@
+﻿ul {
+    list-style: none; /* Remove list bullets */
+    padding: 0;
+    margin: 0;
+}
+
+.teams {
+    font-weight: bold
+}

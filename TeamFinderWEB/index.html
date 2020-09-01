@@ -1,31 +1,36 @@
 <!DOCTYPE html>
 <html>
+<head><link rel="stylesheet" type="text/css" href="StyleSheet.css"></head>
 <body>
 
-<h1>TeamPicker Web</h1>
+    <h1>TeamPicker Web</h1>
+    <p id="foo"></p>
+    <div id="myDiv"></div>
 
-<form id="myForm">
-  <label for="fname">First name:</label>
-  <input type="text" id="fname" name="fname"><br><br>
-  <label for="lname">Last name:</label>
-  <input type="text" id="lname" name="lname"><br><br>
-  <label for="pvalue">Player value (1-5):</label>
-  <input type="text" id="pvalue" name="pvalue"><br><br>
-  <input type="button" onclick="playerFormOnClick()" value="Submit">
-</form>
-    
-    <button id=findTeamsButton onclick="displayTeam()">Find Teams!</button>
+    <input type="file" id="fileInput" name="file" /> Read bytes:
+    <span class="readBytesButtons">
+        <button onclick="onClickReadFileButton()">read file</button>
+    </span>
+    <div id="byte_content"></div>
+
+    <button id=refreshPlayersList onclick="onClickRefreshPlayersListButton()">refresh player's list</button>
+    <button id=findTeamsButton onclick="onClickFindTeamButton()">Find Teams!</button>
+    <button id=displayTeams onclick="displayTeam()">Display Team n</button>
     <label for="outcomeDropdown">Choose a team:</label>
     <select name="Select Outcome" id="outcomeDropdown">
-    <option value="0">Default</option>
+        <option value="0">-</option>
     </select>
-    
-    
-<p id="whiteTeam"></p>
-<p>VS</p>
-<p id="blackTeam"></p>
 
-<script src="script.js"></script>
+    <div class="teams">
+    <p id="whiteTeam"></p>
+    <p id="VS"></p>
+    <p id="blackTeam"></p>
+    </div>
     
+    <div><p>How To Use:</p><p>Make sure you create a text file locally on your computer containing EXACTLY " Name Value " one per line</p><p>Click on choose file, choose your text file, then click read file, then click refresh players's list.</p>
+    <p>All the available players in the text file should be displayed. Tick the checkbox next to each of those you are playing (must be an even number) then select Find Teams!</p><p>If successful you will see the dropdown box next to Choose a team populated with values. Choose one at a time and click Display Team n</p></div>
+
+    <script src="script.js"></script>
+
 </body>
 </html>
