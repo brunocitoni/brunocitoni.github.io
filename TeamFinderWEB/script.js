@@ -194,7 +194,9 @@ function readBlob(opt_startByte, opt_stopByte) {
     var reader = new FileReader();
 
     var doSomeStuff = function () {
-        // parse and uverride players list 
+        // overwrite players array
+        players.names=[];
+        players.values=[];
        // console.log("The text content was " + txtContent);
 
         var myArray = txtContent.split('\n');
