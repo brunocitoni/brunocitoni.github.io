@@ -2,35 +2,49 @@
 <html>
 <head><link rel="stylesheet" type="text/css" href="StyleSheet.css"></head>
 <body>
+    <div class="parent">
+        <header><h1>TeamPicker Web v 1.0</h1></header>
 
-    <h1>TeamPicker Web</h1>
-    <p id="foo"></p>
-    <div id="myDiv"></div>
+        <div class="left-sidebar">
+            <input type="file" id="fileInput" name="file" /> Read bytes:
+            <span class="readBytesButtons">
+                <button>read file</button>
+            </span>
+            <div id="byte_content"></div>
+            <br />
+            <div> Enter Name : <input type="text" id="newPlayerNameField"></div>
+            <div> Enter Value (1-5): <input type="text" id="newPlayerValueField"></div>
+            <button onclick="addPlayerToList()">Add Player to list</button>
 
-    <input type="file" id="fileInput" name="file" /> Read bytes:
-    <span class="readBytesButtons">
-        <button onclick="onClickReadFileButton()">read file</button>
-    </span>
-    <div id="byte_content"></div>
 
-    <button id=refreshPlayersList onclick="onClickRefreshPlayersListButton()">refresh player's list</button>
-    <button id=findTeamsButton onclick="onClickFindTeamButton()">Find Teams!</button>
-    <button id=displayTeams onclick="displayTeam()">Display Team n</button>
-    <label for="outcomeDropdown">Choose a team:</label>
-    <select name="Select Outcome" id="outcomeDropdown">
-        <option value="0">-</option>
-    </select>
+            <button id=findTeamsButton onclick="onClickFindTeamButton()">Find Teams!</button>
+            <button id=displayTeams onclick="displayTeam()">Display Team n</button>
+            <label for="outcomeDropdown">Choose a team:</label>
+            <select name="Select Outcome" id="outcomeDropdown">
+                <option value="0">-</option>
+            </select>
 
-    <div class="teams">
-    <p id="whiteTeam"></p>
-    <p id="VS"></p>
-    <p id="blackTeam"></p>
+            <button onclick="saveDatabase()">Save DB</button>
+            <button onclick="deletePlayerFromList()">Delete Players</button>
+        </div>
+
+        <main contenteditable><p id="foo"></p></main>
+
+        <div class="right-sidebar">
+            <div class="teams">
+                <p id="whiteTeam"></p>
+                <p id="VS"></p>
+                <p id="blackTeam"></p>
+            </div>
+        </div>
+
+        <footer>
+            <p>How To Use:</p><p>Make sure you create a text file locally on your computer containing EXACTLY " Name Value " one per line</p><p>Click on choose file, choose your text file, then click read file, then click refresh players's list.</p>
+            <p>All the available players in the text file should be displayed. Tick the checkbox next to each of those you are playing (must be an even number) then select Find Teams!</p><p>If successful you will see the dropdown box next to Choose a team populated with values. Choose one at a time and click Display Team n</p>
+        </footer>
+
+        <script src="script.js"></script>
+        <script src="FileSaver.js"></script>
     </div>
-    
-    <div><p>How To Use:</p><p>Make sure you create a text file locally on your computer containing EXACTLY " Name Value " one per line</p><p>Click on choose file, choose your text file, then click read file, then click refresh players's list.</p>
-    <p>All the available players in the text file should be displayed. Tick the checkbox next to each of those you are playing (must be an even number) then select Find Teams!</p><p>If successful you will see the dropdown box next to Choose a team populated with values. Choose one at a time and click Display Team n</p></div>
-
-    <script src="script.js"></script>
-
 </body>
 </html>
