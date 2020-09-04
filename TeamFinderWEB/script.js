@@ -323,7 +323,7 @@ if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elain
 if (!isMobile) {
     onClickRefreshPlayersListButton();
 } else {
-    var players = { [], []};
+    var players = { names: [], values: [] };
 }
 // read text file
 
