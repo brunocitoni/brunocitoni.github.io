@@ -319,9 +319,11 @@ if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elain
 
 
 
-//pnly do this if on desktop, not on mobile
+//if on desktop, display pre-made list, if on mobile don't display it and delete it instead
 if (!isMobile) {
     onClickRefreshPlayersListButton();
+} else {
+    var players = { [], []};
 }
 // read text file
 
