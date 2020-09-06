@@ -1,50 +1,55 @@
 <!DOCTYPE html>
 <html>
-<head><link rel="stylesheet" type="text/css" href="StyleSheet.css"></head>
+<head></head>
 <body>
-    <div class="parent">
-        <header><h1>TeamPicker Web v 1.0</h1></header>
+        <div class="header"><h1>TeamPicker Web v1.0</h1></div>
 
         <div class="left-sidebar">
-            <input type="file" id="fileInput" name="file" /> Read bytes:
+            <input type="file" id="fileInput" name="file" /><br>
             <span class="readBytesButtons">
-                <button>read file</button>
+                <button>Upload File</button>
             </span>
             <div id="byte_content"></div>
             <br />
+            
             <div> Enter Name : <input type="text" id="newPlayerNameField"></div>
             <div> Enter Value (1-5): <input type="text" id="newPlayerValueField"></div>
             <button onclick="addPlayerToList()">Add Player to list</button>
+            <button onclick="deletePlayerFromList()">Delete Players</button>
 
+            <br />
 
-            <button id=findTeamsButton onclick="onClickFindTeamButton()">Find Teams!</button>
-            <button id=displayTeams onclick="displayTeam()">Display Team n</button>
+            <button onclick="saveDatabase()">Save DB</button>
+        </div>
+
+        <main><p id="foo"></p>
+            <button id=findTeamsButton onclick="onClickFindTeamButton()">Find Teams!</button>    
             <label for="outcomeDropdown">Choose a team:</label>
             <select name="Select Outcome" id="outcomeDropdown">
                 <option value="0">-</option>
             </select>
-
-            <button onclick="saveDatabase()">Save DB</button>
-            <button onclick="deletePlayerFromList()">Delete Players</button>
-        </div>
-
-        <main contenteditable><p id="foo"></p></main>
+            <button id=displayTeams onclick="displayTeam()">Display Team</button>
+    </main>
 
         <div class="right-sidebar">
             <div class="teams">
-                <p id="whiteTeam"></p>
+                White Team<p id="whiteTeam"></p>
                 <p id="VS"></p>
-                <p id="blackTeam"></p>
+                Black Team<p id="blackTeam"></p>
             </div>
         </div>
 
-        <footer>
-            <p>How To Use:</p><p>Make sure you create a text file locally on your computer containing EXACTLY " Name Value " one per line</p><p>Click on choose file, choose your text file, then click read file, then click refresh players's list.</p>
-            <p>All the available players in the text file should be displayed. Tick the checkbox next to each of those you are playing (must be an even number) then select Find Teams!</p><p>If successful you will see the dropdown box next to Choose a team populated with values. Choose one at a time and click Display Team n</p>
-        </footer>
+        <div class = "help">
+            <p>How To Use:</p><p>If not on mobile, click on Save DB and edit the file that you just downloaded. Then click on choose file, choose your edited text file, then click upload file.</p>
+            <p>You can enter each player's name and value in the boxes on the left and click Add player to list to add players manually. </p>
+            <p>Once the players list is displayed, tick the checkbox next to each of those you are playing (must be an even number) then select Find Teams!</p>
+            <p>If successful you will see the dropdown box next to Choose a team populated with values. Choose one and click Display Team</p>
+        </div>
 
+        <div class ="footer">Copyright &copy; 2020 Bruno Citoni. All Rights Reserved</div>
+    
         <script src="script.js"></script>
         <script src="FileSaver.js"></script>
-    </div>
+        <link rel="stylesheet" type="text/css" href="StyleSheet.css">
 </body>
 </html>
