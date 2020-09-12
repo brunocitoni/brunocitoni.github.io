@@ -172,8 +172,8 @@ function onClickFindTeamButton() {
     }
 
     //Check that playingPlayers is Even number (can I make it work with odd numbers too?)
-    if (!isEven(playingPlayers.names.length)) {
-        alert("Player number must be even!");
+    if (!isEven(playingPlayers.names.length) || playingPlayers.names.length == 0) {
+        alert("Please select an even number of players!");
         return 0;
     }
     else {
