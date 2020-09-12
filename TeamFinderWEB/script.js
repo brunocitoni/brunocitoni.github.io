@@ -1,81 +1,86 @@
-﻿function combinationsAV2(n, k) {
-  var result= [];
-  var combos = [];
-    
-  const recurse = start => {
-    if (combos.length + (n - start + 1) < k) { return }
-    recurse(start + 1);
-    combos.push(start);
-    if(combos.length === k) {     
-       result.push(combos.slice());
-    }else if(combos.length + (n - start + 2) >= k){
-       recurse(start + 1);
+﻿function isEven(value) {
+    if (value % 2 == 0)
+        return true;
+    else
+        return false;
+}
+
+function combinationsAV2(n, k) {
+    var result = [];
+    var combos = [];
+
+    const recurse = start => {
+        if (combos.length + (n - start + 1) < k) { return }
+        recurse(start + 1);
+        combos.push(start);
+        if (combos.length === k) {
+            result.push(combos.slice());
+        } else if (combos.length + (n - start + 2) >= k) {
+            recurse(start + 1);
+        }
+        combos.pop();
     }
-    combos.pop();
-  }
-  recurse(1, combos);
-  return result;
+    recurse(1, combos);
+    return result;
 }
 
-function sum(input){
-             
- if (toString.call(input) !== "[object Array]")
-    return false;
-      
-            var total =  0;
-            for(var i=0;i<input.length;i++)
-              {                  
-                if(isNaN(input[i])){
-                continue;
-                 }
-                  total += Number(input[i]);
-               }
-             return total;
+function sum(input) {
+
+    if (toString.call(input) !== "[object Array]")
+        return false;
+
+    var total = 0;
+    for (var i = 0; i < input.length; i++) {
+        if (isNaN(input[i])) {
+            continue;
+        }
+        total += Number(input[i]);
+    }
+    return total;
 }
 
-function findTeams(players){
-    
-    var playerNames = players.names;
-    var playerValues = players.values;
+function findTeams(playingPlayers) {
+
+    var playerNames = playingPlayers.names;
+    var playerValues = playingPlayers.values;
     var playersSelected = playerValues.length;
-    var playersPerTeam = playerNames.length/2;
-    
+    var playersPerTeam = playerNames.length / 2;
+
     // main starts here
-    var c = combinationsAV2(playersSelected,playersPerTeam); 
+    var c = combinationsAV2(playersSelected, playersPerTeam);
     // This outputs an array of array that need to be splitted first-last, second-secondlast etc
 
-    var whiteTeam=[];
-    var blackTeam=[];
+    var whiteTeam = [];
+    var blackTeam = [];
 
-    for (i = 0; i < c.length/2; i++) {
-      whiteTeam.push(c[i]);
-      blackTeam.push(c[c.length-i-1]);
+    for (i = 0; i < c.length / 2; i++) {
+        whiteTeam.push(c[i]);
+        blackTeam.push(c[c.length - i - 1]);
     }
 
     // Only keep those who are balanced
-    var desiredTeamValue = sum(playerValues)/2;
-    var whiteTeamNew=[];
-    var blackTeamNew=[];
+    var desiredTeamValue = sum(playerValues) / 2;
+    var whiteTeamNew = [];
+    var blackTeamNew = [];
     var summation = 0;
     var increment;
 
-    for (i = 0; i < whiteTeam.length; i++){
-        for (j=0; j < whiteTeam[i].length; j++){
-            increment = playerValues[whiteTeam[i][j]-1];
+    for (i = 0; i < whiteTeam.length; i++) {
+        for (j = 0; j < whiteTeam[i].length; j++) {
+            increment = playerValues[whiteTeam[i][j] - 1];
             summation = summation + increment;
         }
 
         // if the sum of values in team is not good, delete team from array
-        if (summation == desiredTeamValue){
+        if (summation == desiredTeamValue) {
             whiteTeamNew.push(whiteTeam[i]);
             blackTeamNew.push(blackTeam[i]);
         }
         summation = 0; // reset sum as last thing
     }
     // check that teams array are not empty here and have at least 1 possible team, otherwise notify and abort  
-    if ((Array.isArray(whiteTeamNew) && whiteTeamNew.length))
-    {
-    // switch back to using the normal arrays for simplicity
+    if ((Array.isArray(whiteTeamNew) && whiteTeamNew.length)) {
+        // switch back to using the normal arrays for simplicity
         whiteTeam = whiteTeamNew;
         blackTeam = blackTeamNew;
 
@@ -89,7 +94,7 @@ function findTeams(players){
         return 0;
     }
 
- 
+
 }
 
 function populateDropdown(id, list) {
@@ -119,11 +124,11 @@ function displayTeam() {
 
     for (j = 0; j < whiteTeam[strUser].length; j++) {
         if (j < whiteTeam[strUser].length - 1) {
-            string1 = string1 + players.names[whiteTeam[strUser][j] - 1] + ", ";
-            string2 = string2 + players.names[blackTeam[strUser][j] - 1] + ", ";
+            string1 = string1 + playingPlayers.names[whiteTeam[strUser][j] - 1] + ", ";
+            string2 = string2 + playingPlayers.names[blackTeam[strUser][j] - 1] + ", ";
         } else if (j < whiteTeam[strUser].length) {
-            string1 = string1 + players.names[whiteTeam[strUser][j] - 1];
-            string2 = string2 + players.names[blackTeam[strUser][j] - 1];
+            string1 = string1 + playingPlayers.names[whiteTeam[strUser][j] - 1];
+            string2 = string2 + playingPlayers.names[blackTeam[strUser][j] - 1];
         }
     }
     document.getElementById("whiteTeam").innerHTML = string1;
@@ -157,7 +162,7 @@ function makeCheckboxList(array) {
 function onClickFindTeamButton() {
 
     var lgh = players.names.length;
-    var playingPlayers = { names: [], values: [] };
+    playingPlayers = { names: [], values: [] };
     for (var i = 0; i < lgh; i++) {
         var string = "playersCheckbox" + i;
         if (document.getElementById(string).checked) {
@@ -166,11 +171,23 @@ function onClickFindTeamButton() {
         }
     }
 
-    var combinationOutput = findTeams(playingPlayers);
-    whiteTeam = combinationOutput.whiteTeam;
-    blackTeam = combinationOutput.blackTeam;
+    //Check that playingPlayers is Even number (can I make it work with odd numbers too?)
+    if (!isEven(playingPlayers.names.length)) {
+        alert("Player number must be even!");
+        return 0;
+    }
+    else {
+        var combinationOutput = findTeams(playingPlayers);
+        whiteTeam = combinationOutput.whiteTeam;
+        blackTeam = combinationOutput.blackTeam;
 
-    //TODO print 1st team even without the displayTeam button being pressed
+        //TODO print 1st team even without the displayTeam button being pressed
+        var randTeam = Math.floor(Math.random() * whiteTeam.length);
+        // set dropbox to random value and displayTeams()
+        document.getElementById('outcomeDropdown').value = randTeam;
+        displayTeam();
+    }
+
 }
 
 function onClickRefreshPlayersListButton() {
@@ -253,10 +270,10 @@ function saveDatabase() {
     for (var i = 0; i < players.names.length; i++) {
         newtext = [players.names[i] + players.values[i] + '\n'];
         wholetext = wholetext.concat(newtext);
-        }
-    
+    }
 
-var blob = new Blob([wholetext],
+
+    var blob = new Blob([wholetext],
         { type: "text/plain;charset=utf-8" });
     saveAs(blob, "myFirstPlayersList.txt");
 }
@@ -308,6 +325,7 @@ var players = {
 };
 var whiteteam = [];
 var blackTeam = [];
+var playingPlayers = { names: [], values: [] };
 var txtContent;
 
 var isMobile = false; //initiate as false
@@ -325,11 +343,3 @@ if (!isMobile) {
 } else {
     var players = { names: [], values: [] };
 }
-// read text file
-
-// parse
-//alert(txtContent);
-
-
-// Add the contents of players to #foo:
-//document.getElementById('foo').appendChild(makeCheckboxList(players.names));
