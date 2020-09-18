@@ -1,54 +1,56 @@
 <!DOCTYPE html>
 <html>
-<head></head>
+<link rel="stylesheet" type="text/css" href="StyleSheet.css">
+<head>
+</head>
 <body>
-        <div class="header"><h1>TeamPicker Web v1.0</h1></div>
+    <div class="header"><h1>TeamPicker Web v1.0</h1></div>
 
-        <div class="left-sidebar">
-            <input type="file" id="fileInput" name="file" /><br>
-            <span class="readBytesButtons">
-                <button>Upload File</button>
-            </span>
-            <div id="byte_content"></div>
-            <br />
-            
-            <div> Enter Name : <input type="text" id="newPlayerNameField"></div>
-            <div> Enter Value (1-5): <input type="text" id="newPlayerValueField"></div>
-            <button onclick="addPlayerToList()">Add Player to list</button>
-            <button onclick="deletePlayerFromList()">Delete Players</button>
+    <div class="left-sidebar">
+        <input type="file" id="fileInput" name="file" /><br>
+        <span class="readBytesButtons">
+            <button>Upload File</button>
+        </span>
+        <div id="byte_content"></div>
+        <br />
 
-            <br />
+        <div> Enter Name : <input type="text" id="newPlayerNameField"></div>
+        <div> Enter Value (1-5): <input type="text" id="newPlayerValueField"></div>
+        <button onclick="addPlayerToList()">Add Player to list</button>
+        <button onclick="deletePlayerFromList()">Delete Players</button>
 
-            <button onclick="saveDatabase()">Save DB</button>
-        </div>
+        <br />
 
-        <main><p id="foo"></p>
-            <button id=findTeamsButton onclick="onClickFindTeamButton()">Find Teams!</button>    
-            <label for="outcomeDropdown">Choose a team:</label>
-            <select name="Select Outcome" id="outcomeDropdown">
-                <option value="0">-</option>
-            </select>
-            <button id=displayTeams onclick="displayTeam()">Display Team</button>
+        <button onclick="saveDatabase()">Save DB</button>
+    </div>
+
+    <main>
+        <p id="playersList"></p>
+        <button id=findTeamsButton onclick="onClickFindTeamButton()">Find Teams!</button>
+        <label for="outcomeDropdown">Choose a team:</label>
+        <select name="Select Outcome" id="outcomeDropdown">
+            <option value="0">-</option>
+        </select>
+        <button id=displayTeams onclick="displayTeam()">Display Team</button>
     </main>
 
-        <div class="right-sidebar">
-            <div class="teams">
-                White Team<p id="whiteTeam"></p>
-                <p id="VS"></p>
-                Black Team<p id="blackTeam"></p>
-            </div>
+    <div class="right-sidebar">
+        <div class="teams">
+            White Team<p id="whiteTeam"></p>
+            <p id="VS"></p>
+            Black Team<p id="blackTeam"></p>
         </div>
+    </div>
 
-        <div class = "help">
-            <p>How To Use:</p><p>If not on mobile, click on Save DB and edit the file that you just downloaded. Then upload the edited file.</p>
-            <p>You can also enter each player's name and value in the boxes on the left and click Add player to list to add players manually. </p>
-            <p>Once the players list is displayed, tick the checkbox next to each of those you are playing (must be an even number) then select Find Teams!</p>
-        </div>
+    <div class="help">
+        <p>How To Use:</p><p>If not on mobile, click on Save DB and edit the file that you just downloaded. Then upload the edited file.</p>
+        <p>You can also enter each player's name and value in the boxes on the left and click Add player to list to add players manually. </p>
+        <p>Once the players list is displayed, tick the checkbox next to each of those you are playing (must be an even number) then select Find Teams!</p>
+    </div>
 
-        <div class ="footer">Copyright &copy; 2020 Bruno Citoni. All Rights Reserved</div>
-    
-        <script src="script.js"></script>
-        <script src="FileSaver.js"></script>
-        <link rel="stylesheet" type="text/css" href="StyleSheet.css">
+    <div class="footer">Copyright &copy; 2020 Bruno Citoni. All Rights Reserved</div>
+
+    <script src="script.js"></script>
+    <script src="FileSaver.js"></script>
 </body>
 </html>
