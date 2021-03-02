@@ -27,11 +27,11 @@
     <main>
         <p id="playersList"></p>
         <button id=findTeamsButton onclick="onClickFindTeamButton()">Find Teams!</button>
-        <label for="outcomeDropdown">Choose a team:</label>
+        <!--<label for="outcomeDropdown">Choose a team:</label>
         <select name="Select Outcome" id="outcomeDropdown">
             <option value="0">-</option>
         </select>
-        <button id=displayTeams onclick="displayTeam()">Display Team</button>
+        -->
     </main>
 
     <div class="right-sidebar">
@@ -40,6 +40,12 @@
             <p id="VS"></p>
             Black Team<p id="blackTeam"></p>
         </div>
+
+        <div>
+        <img src="refreshButton.svg" width="25" height="25" border="0" alt="javascript button" onclick="displayTeam()">
+        Team selected: <p id=teamSelected>-</p>
+        </div>
+
     </div>
 
     <div class="help">
@@ -50,7 +56,7 @@
 
     <div class="footer">Copyright &copy; 2020 Bruno Citoni. All Rights Reserved</div>
 
-    <script src="script.js"></script>
+    <script src="script2.js"></script>
     <script src="FileSaver.js"></script>
 </body>
 </html>

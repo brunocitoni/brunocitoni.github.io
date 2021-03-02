@@ -1,4 +1,4 @@
-﻿
+﻿// check if even
 function isEven(value) {
     if (value % 2 == 0)
         return true;
@@ -6,7 +6,7 @@ function isEven(value) {
         return false;
 }
 
-//
+//combination function
 function combinationsAV2(n, k) {
     var result = [];
     var combos = [];
@@ -40,7 +40,7 @@ function sum(input) {
     return total;
 }
 
-
+// function that actually finds teams
 function findTeams(playingPlayers) {
 
     var playerNames = playingPlayers.names;
@@ -237,7 +237,8 @@ function deletePlayerFromList() {
 
     //overrite players with newplayers
     players = newplayers;
-
+    
+    //refresh list
     onClickRefreshPlayersListButton();
 }
 
